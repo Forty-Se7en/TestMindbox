@@ -40,6 +40,12 @@ public static double GetArea<T>(T figure) where T : IHasArea => figure.GetArea()
 Если у продукта нет категорий, то его имя все равно должно выводиться.
 ## Ответ: 
 Исходя из задачи, предполагаю, что есть таблица products, таблица categories, и они имеют связь "многие ко многим" в таблице products_categories. 
-Для вывода всех продуктов даже без категорий используем left join. 
+Для вывода всех продуктов даже без категорий используем left join:
+```sql
+﻿select p.name, c.name
+from products as p
+left join products_categories as pc on p.id = pc.product_id
+left join categories as c on pc.category_id = c.id 
+```
 
 *[Файл SQL](https://github.com/Forty-Se7en/TestMindbox/blob/master/query.sql)*
